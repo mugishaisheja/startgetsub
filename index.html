@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .payment-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Page -->
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="return validateLogin(event)">
+            <div class="input-container">
+                <label for="userId">User ID:</label>
+                <input type="text" id="userId" placeholder="Enter User ID" required>
+            </div>
+            <div class="input-container">
+                <label for="userPin">PIN:</label>
+                <input type="password" id="userPin" placeholder="Enter PIN" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        // Dynamically generate users with user IDs (f1 to f100) and PINs (00001 to 000100)
+        const users = {};
+        for (let i = 1; i <= 100; i++) {
+            const userId = `f${i}`;
+            const userPin = String(i).padStart(5, '0'); // Ensures PINs are 5 digits (e.g., 00001, 00002, etc.)
+            users[userId] = userPin;
+        }
+
+        // Validate the user login credentials
+        function validateLogin(event) {
+            event.preventDefault(); // Prevent form from submitting
+
+            const userId = document.getElementById("userId").value;
+            const userPin = document.getElementById("userPin").value;
+
+            // Check if the entered user ID exists and the PIN matches
+            if (users[userId] && users[userId] === userPin) {
+                // Redirect to the payment page if credentials are correct
+                window.location.href = "start.html"; // Redirecting to a separate page for payment
+            } else {
+                alert("Invalid User ID or PIN.");
+            }
+        }
+    </script>
+
+</body>
+</html>
